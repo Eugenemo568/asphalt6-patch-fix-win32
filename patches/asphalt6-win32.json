@@ -1,0 +1,380 @@
+{
+  "name": "Asphalt 6 Win32 port fixes",
+  "target": "Asphalt 6.exe (Asphalt6-Win32.zip, archive.org/details/asphalt-6-win-32)",
+  "original_size": 653824,
+  "original_sha256": "8b184e4bdc21ff9e51b72e58ca0ae0d618088ecd7f12699811989bf05ee87147",
+  "groups": {
+    "base": {
+      "description": "Required by all other groups: maps the code caves.",
+      "default": true,
+      "patches": [
+        {
+          "offset": 504,
+          "original": "9bdc0400",
+          "patched": "00de0400",
+          "note": ".text VirtualSize 0x4dc9b -> 0x4de00 (maps the code caves)"
+        }
+      ]
+    },
+    "video-hang-fix": {
+      "description": "Fixes the hang on the Gameloft logo when the audio device is not 48 kHz/16-bit.",
+      "default": true,
+      "patches": [
+        {
+          "offset": 319712,
+          "original": "0000000000000000000000000000000000000000",
+          "patched": "8b0668000000886a00568b400cffd0e9226efdff",
+          "note": "VA 0x3004ece0: IAudioClient::Initialize with AUTOCONVERTPCM|SRC_DEFAULT_QUALITY (0x88000000)"
+        },
+        {
+          "offset": 151306,
+          "original": "8b066a006a00568b400cffd0",
+          "patched": "e9d191020090909090909090",
+          "note": "VA 0x30025b0a: movie audio init -> cave with conversion flags"
+        },
+        {
+          "offset": 150367,
+          "original": "0f84c4010000",
+          "patched": "0f84bd010000",
+          "note": "VA 0x3002575f: no audio render client -> mark audio EOF"
+        },
+        {
+          "offset": 150439,
+          "original": "0f887c010000",
+          "patched": "0f8875010000",
+          "note": "VA 0x300257a7: audio ReadSample failure -> mark audio EOF"
+        },
+        {
+          "offset": 150088,
+          "original": "7862",
+          "patched": "785b",
+          "note": "VA 0x30025648: video ReadSample failure -> mark video EOF"
+        }
+      ]
+    },
+    "debug-log": {
+      "description": "Optional: re-enables the loader/engine log on stderr (for bug reports).",
+      "default": false,
+      "patches": [
+        {
+          "offset": 319664,
+          "original": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "patched": "8d442408506a00ff74240c6a02e8e6a5fdff83c40450e83523fbffff7004ff30e8ead4fdff83c418c3",
+          "note": "VA 0x3004ecb0: log(fmt, ...) -> vfprintf(stderr, fmt, args)"
+        },
+        {
+          "offset": 6022,
+          "original": "e8555f0000",
+          "patched": "e825c90400",
+          "note": "VA 0x30002386: loader log call -> cave"
+        },
+        {
+          "offset": 6036,
+          "original": "e8475f0000",
+          "patched": "e817c90400",
+          "note": "VA 0x30002394: loader log call -> cave"
+        },
+        {
+          "offset": 6277,
+          "original": "e8565e0000",
+          "patched": "e826c80400",
+          "note": "VA 0x30002485: loader log call -> cave"
+        },
+        {
+          "offset": 6324,
+          "original": "e8275e0000",
+          "patched": "e8f7c70400",
+          "note": "VA 0x300024b4: loader log call -> cave"
+        },
+        {
+          "offset": 6414,
+          "original": "e8cd5d0000",
+          "patched": "e89dc70400",
+          "note": "VA 0x3000250e: loader log call -> cave"
+        },
+        {
+          "offset": 6674,
+          "original": "e8c95c0000",
+          "patched": "e899c60400",
+          "note": "VA 0x30002612: loader log call -> cave"
+        },
+        {
+          "offset": 7113,
+          "original": "e8125b0000",
+          "patched": "e8e2c40400",
+          "note": "VA 0x300027c9: loader log call -> cave"
+        },
+        {
+          "offset": 7261,
+          "original": "e87e5a0000",
+          "patched": "e84ec40400",
+          "note": "VA 0x3000285d: loader log call -> cave"
+        },
+        {
+          "offset": 7279,
+          "original": "e86c5a0000",
+          "patched": "e83cc40400",
+          "note": "VA 0x3000286f: loader log call -> cave"
+        },
+        {
+          "offset": 7925,
+          "original": "e8e6570000",
+          "patched": "e8b6c10400",
+          "note": "VA 0x30002af5: loader log call -> cave"
+        },
+        {
+          "offset": 11129,
+          "original": "e8624b0000",
+          "patched": "e832b50400",
+          "note": "VA 0x30003779: loader log call -> cave"
+        },
+        {
+          "offset": 11167,
+          "original": "e83c4b0000",
+          "patched": "e80cb50400",
+          "note": "VA 0x3000379f: loader log call -> cave"
+        },
+        {
+          "offset": 11199,
+          "original": "e81c4b0000",
+          "patched": "e8ecb40400",
+          "note": "VA 0x300037bf: loader log call -> cave"
+        },
+        {
+          "offset": 11643,
+          "original": "e860490000",
+          "patched": "e830b30400",
+          "note": "VA 0x3000397b: loader log call -> cave"
+        },
+        {
+          "offset": 11806,
+          "original": "e8bd480000",
+          "patched": "e88db20400",
+          "note": "VA 0x30003a1e: loader log call -> cave"
+        },
+        {
+          "offset": 12756,
+          "original": "e807450000",
+          "patched": "e8d7ae0400",
+          "note": "VA 0x30003dd4: loader log call -> cave"
+        },
+        {
+          "offset": 14164,
+          "original": "e8873f0000",
+          "patched": "e857a90400",
+          "note": "VA 0x30004354: loader log call -> cave"
+        },
+        {
+          "offset": 19876,
+          "original": "e837290000",
+          "patched": "e807930400",
+          "note": "VA 0x300059a4: loader log call -> cave"
+        },
+        {
+          "offset": 19979,
+          "original": "e8d0280000",
+          "patched": "e8a0920400",
+          "note": "VA 0x30005a0b: loader log call -> cave"
+        },
+        {
+          "offset": 20020,
+          "original": "e8a7280000",
+          "patched": "e877920400",
+          "note": "VA 0x30005a34: loader log call -> cave"
+        },
+        {
+          "offset": 20565,
+          "original": "e886260000",
+          "patched": "e856900400",
+          "note": "VA 0x30005c55: loader log call -> cave"
+        },
+        {
+          "offset": 21798,
+          "original": "e8b5210000",
+          "patched": "e8858b0400",
+          "note": "VA 0x30006126: loader log call -> cave"
+        },
+        {
+          "offset": 22288,
+          "original": "e8cb1f0000",
+          "patched": "e89b890400",
+          "note": "VA 0x30006310: loader log call -> cave"
+        },
+        {
+          "offset": 32233,
+          "original": "e8f2f8ffff",
+          "patched": "e8c2620400",
+          "note": "VA 0x300089e9: loader log call -> cave"
+        },
+        {
+          "offset": 38725,
+          "original": "e896dfffff",
+          "patched": "e866490400",
+          "note": "VA 0x3000a345: loader log call -> cave"
+        },
+        {
+          "offset": 46514,
+          "original": "e829c1ffff",
+          "patched": "e8f92a0400",
+          "note": "VA 0x3000c1b2: loader log call -> cave"
+        },
+        {
+          "offset": 48035,
+          "original": "e838bbffff",
+          "patched": "e808250400",
+          "note": "VA 0x3000c7a3: loader log call -> cave"
+        },
+        {
+          "offset": 49211,
+          "original": "e8a0b6ffff",
+          "patched": "e870200400",
+          "note": "VA 0x3000cc3b: loader log call -> cave"
+        },
+        {
+          "offset": 51219,
+          "original": "e8c8aeffff",
+          "patched": "e898180400",
+          "note": "VA 0x3000d413: loader log call -> cave"
+        },
+        {
+          "offset": 51417,
+          "original": "e802aeffff",
+          "patched": "e8d2170400",
+          "note": "VA 0x3000d4d9: loader log call -> cave"
+        },
+        {
+          "offset": 51459,
+          "original": "e8d8adffff",
+          "patched": "e8a8170400",
+          "note": "VA 0x3000d503: loader log call -> cave"
+        },
+        {
+          "offset": 55980,
+          "original": "e82f9cffff",
+          "patched": "e8ff050400",
+          "note": "VA 0x3000e6ac: loader log call -> cave"
+        },
+        {
+          "offset": 56543,
+          "original": "e8fc99ffff",
+          "patched": "e8cc030400",
+          "note": "VA 0x3000e8df: loader log call -> cave"
+        },
+        {
+          "offset": 56599,
+          "original": "e8c499ffff",
+          "patched": "e894030400",
+          "note": "VA 0x3000e917: loader log call -> cave"
+        },
+        {
+          "offset": 58901,
+          "original": "e8c690ffff",
+          "patched": "e896fa0300",
+          "note": "VA 0x3000f215: loader log call -> cave"
+        },
+        {
+          "offset": 61043,
+          "original": "e86888ffff",
+          "patched": "e838f20300",
+          "note": "VA 0x3000fa73: loader log call -> cave"
+        },
+        {
+          "offset": 61630,
+          "original": "e81d86ffff",
+          "patched": "e8edef0300",
+          "note": "VA 0x3000fcbe: loader log call -> cave"
+        },
+        {
+          "offset": 62548,
+          "original": "e88782ffff",
+          "patched": "e857ec0300",
+          "note": "VA 0x30010054: loader log call -> cave"
+        },
+        {
+          "offset": 62904,
+          "original": "e82381ffff",
+          "patched": "e8f3ea0300",
+          "note": "VA 0x300101b8: loader log call -> cave"
+        },
+        {
+          "offset": 64245,
+          "original": "e8e67bffff",
+          "patched": "e8b6e50300",
+          "note": "VA 0x300106f5: loader log call -> cave"
+        },
+        {
+          "offset": 64510,
+          "original": "e8dd7affff",
+          "patched": "e8ade40300",
+          "note": "VA 0x300107fe: loader log call -> cave"
+        },
+        {
+          "offset": 64583,
+          "original": "e8947affff",
+          "patched": "e864e40300",
+          "note": "VA 0x30010847: loader log call -> cave"
+        },
+        {
+          "offset": 69215,
+          "original": "e87c68ffff",
+          "patched": "e84cd20300",
+          "note": "VA 0x30011a5f: loader log call -> cave"
+        },
+        {
+          "offset": 77917,
+          "original": "e87e46ffff",
+          "patched": "e84eb00300",
+          "note": "VA 0x30013c5d: loader log call -> cave"
+        },
+        {
+          "offset": 86272,
+          "original": "e8db25ffff",
+          "patched": "e8ab8f0300",
+          "note": "VA 0x30015d00: loader log call -> cave"
+        },
+        {
+          "offset": 87098,
+          "original": "e8a122ffff",
+          "patched": "e8718c0300",
+          "note": "VA 0x3001603a: loader log call -> cave"
+        },
+        {
+          "offset": 87113,
+          "original": "e89222ffff",
+          "patched": "e8628c0300",
+          "note": "VA 0x30016049: loader log call -> cave"
+        },
+        {
+          "offset": 87192,
+          "original": "e84322ffff",
+          "patched": "e8138c0300",
+          "note": "VA 0x30016098: loader log call -> cave"
+        },
+        {
+          "offset": 131283,
+          "original": "e80876feff",
+          "patched": "e8d8df0200",
+          "note": "VA 0x30020cd3: loader log call -> cave"
+        },
+        {
+          "offset": 137368,
+          "original": "e8435efeff",
+          "patched": "e813c80200",
+          "note": "VA 0x30022498: loader log call -> cave"
+        },
+        {
+          "offset": 143193,
+          "original": "e88247feff",
+          "patched": "e852b10200",
+          "note": "VA 0x30023b59: loader log call -> cave"
+        },
+        {
+          "offset": 151519,
+          "original": "7420",
+          "patched": "9090",
+          "note": "VA 0x30025bdf: fprintf wrapper: stop discarding stderr"
+        }
+      ]
+    }
+  }
+}

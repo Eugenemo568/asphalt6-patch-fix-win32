@@ -1,0 +1,7 @@
+# never commit game files or executables
+*.exe
+*.orig
+*.app/
+*.bin
+UserData/
+__pycache__/
