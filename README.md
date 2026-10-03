@@ -54,6 +54,7 @@ Bug reports are welcome. Please attach `UserData\diag\run_log.txt` made with `Pa
 ## Credits
 
 - The Windows port is by **cedopa2637** (archive.org).
+- Patch created by Eugenemo568
 - Asphalt 6: Adrenaline © Gameloft.
 - The patcher and its docs are under the MIT license (see `LICENSE`).
 
